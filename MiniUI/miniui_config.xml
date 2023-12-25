@@ -1,0 +1,182 @@
+<MiniUI>
+    <General>
+        <Size Method="SetSize" Param="1, 2">
+            <Interger/>
+            <Enum>
+                <None Value="Size::None"/>
+                <Auto Value="Size::Auto"/>
+            </Enum>
+        </Size>
+        <Width Method="SetWidth" Param="1">
+            <Interger/>
+            <Enum>
+                <None Value="Size::None"/>
+                <Auto Value="Size::Auto"/>
+            </Enum>
+        </Width>
+        <Height Method="SetHeight" Param="1">
+            <Interger/>
+            <Enum>
+                <None Value="Size::None"/>
+                <Auto Value="Size::Auto"/>
+            </Enum>
+        </Height>
+        <Margin Method="SetMargin" Param="1, 4">
+            <Interger/>
+        </Margin>
+        <MarginLeft Method="SetMarginLeft" Param="1">
+            <Interger/>
+        </MarginLeft>
+        <MarginTop Method="SetMarginTop" Param="1">
+            <Interger/>
+        </MarginTop>
+        <MarginRight Method="SetMarginRight" Param="1">
+            <Interger/>
+        </MarginRight>
+        <MarginBottom Method="SetMarginBottom" Param="1">
+            <Interger/>
+        </MarginBottom>
+        <Visible Method="SetVisible" Param="1">
+            <Boolean/>
+        </Visible>
+        <VerticalAlignment Method="SetVerticalAlignment" Param="1">
+            <Enum>
+                <Top Value="VerticalAlignment::Top"/>
+                <Center Value="VerticalAlignment::Center"/>
+                <Bottom Value="VerticalAlignment::Bottom"/>
+            </Enum>
+        </VerticalAlignment>
+        <HorizontalAlignment Method="SetHorizontalAlignment" Param="1">
+            <Enum>
+                <Left Value="HorizontalAlignment::Left"/>
+                <Center Value="HorizontalAlignment::Center"/>
+                <Right Value="HorizontalAlignment::Right"/>
+            </Enum>
+        </HorizontalAlignment>
+    </General>
+    <Specific>
+        <Window ContentProperty="Content" MultipleContent="false" UseGeneral="false">
+            <Content Method="SetContent" Param="1">
+                <Object/>
+            </Content>
+        </Window>
+        <Button ContentProperty="Content" MultipleContent="false">
+            <Content Method="SetContent" Param="1">
+                <String/>
+                <Object/>
+            </Content>
+            <ForeColor Method="SetForeColor" Param="1">
+                <Color/>
+            </ForeColor>
+            <Font Method="SetFont" Param="1">
+                <Raw/>
+            </Font>
+            <BackColor Method="SetForeColor" Param="1">
+                <Color/>
+            </BackColor>
+            <BorderColor Method="SetBorderColor" Param="1">
+                <Color/>
+            </BorderColor>
+            <BorderSize Method="SetBorderSize" Param="1">
+                <Interger/>
+            </BorderSize>
+        </Button>
+        <Label ContentProperty="Text" MultipleContent="false">
+            <Text Method="SetText" Param="1">
+                <String/>
+            </Text>
+            <ForeColor Method="SetForeColor" Param="1">
+                <Color/>
+            </ForeColor>
+            <Font Method="SetFont" Param="1">
+                <Raw/>
+            </Font>
+        </Label>
+        <ProgressBar>
+            <Color Method="SetColor" Param="1">
+                <Color/>
+            </Color>
+            <BackColor Method="SetForeColor" Param="1">
+                <Color/>
+            </BackColor>
+            <BorderColor Method="SetBorderColor" Param="1">
+                <Color/>
+            </BorderColor>
+            <BorderSize Method="SetBorderSize" Param="1">
+                <Interger/>
+            </BorderSize>
+            <MaxValue Method="SetMaxValue" Param="1">
+                <Interger/>
+            </MaxValue>
+            <Value Method="SetValue" Param="1">
+                <Interger/>
+            </Value>
+        </ProgressBar>
+        <RichTextBox ContentProperty="Text" MultipleContent="false">
+            <Text Method="SetText" Param="1">
+                <String/>
+            </Text>
+            <BackColor Method="SetForeColor" Param="1">
+                <Color/>
+            </BackColor>
+            <ForeColor Method="SetForeColor" Param="1">
+                <Color/>
+            </ForeColor>
+            <Font Method="SetFont" Param="1">
+                <Raw/>
+            </Font>
+            <BorderColor Method="SetBorderColor" Param="1">
+                <Color/>
+            </BorderColor>
+            <BorderSize Method="SetBorderSize" Param="1">
+                <Interger/>
+            </BorderSize>
+        </RichTextBox>
+        <StackPanel ContentProperty="Content" MultipleContent="true">
+            <Content Method="Children.Add" Param="1">
+                <Object/>
+            </Content>
+            <Orientation Method="SetOrientation" Param="1">
+                <Enum>
+                    <Horizontal Value="Orientation::Horizontal"/>
+                    <Vertical Value="Orientation::Vertical"/>
+                    <None Value="Orientation::None"/>
+                </Enum>
+            </Orientation>
+            <BackColor Method="SetBackColor" Param="1">
+                <Color/>
+            </BackColor>
+        </StackPanel>
+        <TextBox ContentProperty="Text" MultipleContent="false">
+            <Text Method="SetText" Param="1">
+                <String/>
+            </Text>
+            <BackColor Method="SetForeColor" Param="1">
+                <Color/>
+            </BackColor>
+            <ForeColor Method="SetForeColor" Param="1">
+                <Color/>
+            </ForeColor>
+            <Font Method="SetFont" Param="1">
+                <Raw/>
+            </Font>
+            <BorderColor Method="SetBorderColor" Param="1">
+                <Color/>
+            </BorderColor>
+            <BorderSize Method="SetBorderSize" Param="1">
+                <Interger/>
+            </BorderSize>
+            <PasswordChar Method="SetPasswordChar" Param="1">
+                <String/>
+            </PasswordChar>
+        </TextBox>
+        <UserControl ContentProperty="Content" MultipleContent="false">
+            <Content Method="SetContent" Param="1">
+                <Object/>
+            </Content>
+            <BackColor Method="SetForeColor" Param="1">
+                <Color/>
+            </BackColor>
+        </UserControl>
+    </Specific>
+</MiniUI>
