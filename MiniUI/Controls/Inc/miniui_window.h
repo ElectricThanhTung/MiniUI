@@ -13,6 +13,8 @@
 class Window : public Control {
 private:
     Control *content;
+    Rect requestRect;
+
     Window(const Window &) = delete;
     void operator=(const Window &) = delete;
 
@@ -25,13 +27,18 @@ private:
     void SetParent(Control &) = delete;
     void SetSize(const Size &) = delete;
     const Size &GetSize(void) = delete;
+
 protected:
     virtual void OnDraw(Graphics &g);
+    virtual bool RequestUpdate(bool isRecall);
+    virtual void SetRequestRect(const Rect &rect);
     virtual void UpdateActualWidth(int16_t referWidth);
     virtual void UpdateActualHeight(int16_t referHeight);
+    virtual void UpdateLocation(void);
 
     using Control::SetActualWidth;
     using Control::SetActualHeight;
+    using Control::SetLocation;
 public:
     static void (*ScreenDriver)(const RgbColor *rgbBuff, uint16_t x, uint16_t y, uint16_t width, uint16_t height);
 

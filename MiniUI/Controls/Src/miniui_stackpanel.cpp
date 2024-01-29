@@ -14,7 +14,10 @@ backColor(Color::Transparent) {
 }
 
 void StackPanel::SetOrientation(const Orientation &value) {
-    this->orientation = value;
+    if(this->orientation != value) {
+        this->orientation = value;
+        this->RequestUpdate();
+    }
 }
 
 const Orientation &StackPanel::GetOrientation(void) {
@@ -22,7 +25,10 @@ const Orientation &StackPanel::GetOrientation(void) {
 }
 
 void StackPanel::SetBackColor(const Color &color) {
-    this->backColor = color;
+    if(this->backColor != color) {
+        this->backColor = color;
+        this->RequestUpdate();
+    }
 }
 
 const Color &StackPanel::GetBackColor(void) {
@@ -119,6 +125,45 @@ void StackPanel::UpdateActualHeight(int16_t referHeight) {
             const Thickness &childMargin = this->Children[i].GetMargin();
             if(child.GetSize().Height == Size::None)
                 child.UpdateActualHeight(noneHeight);
+        }
+    }
+}
+
+void StackPanel::UpdateLocation(void) {
+    if(this->orientation == Orientation::Horizontal) {
+        int16_t x = this->GetLoaction().X;
+        int16_t y = this->GetLoaction().Y;
+        for(uint16_t i = 0; i < this->Children.Count; i++) {
+            Control &obj = this->Children[i];
+            const Size &objSize = obj.GetActualSize();
+            const Thickness &objMargin = obj.GetMargin();
+            x += objMargin.Left;
+            obj.SetLocation(x, y + objMargin.Top);
+            obj.UpdateLocation();
+            x += objMargin.Right + objSize.Width;
+        }
+    }
+    else if(this->orientation == Orientation::Vertical) {
+        int16_t x = this->GetLoaction().X;
+        int16_t y = this->GetLoaction().Y;
+        for(uint16_t i = 0; i < this->Children.Count; i++) {
+            Control &obj = this->Children[i];
+            const Size &objSize = obj.GetActualSize();
+            const Thickness &objMargin = obj.GetMargin();
+            y += objMargin.Top;
+            obj.SetLocation(x + objMargin.Left, y);
+            obj.UpdateLocation();
+            y += objMargin.Bottom + objSize.Height;
+        }
+    }
+    else {
+        int16_t x = this->GetLoaction().X;
+        int16_t y = this->GetLoaction().Y;
+        for(uint16_t i = 0; i < this->Children.Count; i++) {
+            Control &obj = this->Children[i];
+            const Thickness &objMargin = obj.GetMargin();
+            obj.SetLocation(x + objMargin.Left, y + objMargin.Top);
+            obj.UpdateLocation();
         }
     }
 }

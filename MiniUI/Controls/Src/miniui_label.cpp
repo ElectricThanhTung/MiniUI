@@ -24,6 +24,7 @@ Label::Label(const char *text, const Color &foreColor, const Font &font) : Contr
 
 void Label::SetText(const char *text) {
     this->text = text;
+    this->RequestUpdate();
 }
 
 const char *Label::GetText(void) {
@@ -31,7 +32,10 @@ const char *Label::GetText(void) {
 }
 
 void Label::SetForeColor(const Color &color) {
-    this->foreColor = color;
+    if(this->foreColor != color) {
+        this->foreColor = color;
+        this->RequestUpdate();
+    }
 }
 
 const Color &Label::GetForeColor(void) {
@@ -39,7 +43,10 @@ const Color &Label::GetForeColor(void) {
 }
 
 void Label::SetFont(const Font &font) {
-    this->font = font;
+    if(this->font != font) {
+        this->font = font;
+        this->RequestUpdate();
+    }
 }
 
 const Font &Label::GetFont(void) {
@@ -76,6 +83,10 @@ void Label::UpdateActualHeight(int16_t referHeight) {
         else
             this->SetActualHeight(0);
     }
+}
+
+void Label::UpdateLocation(void) {
+
 }
 
 void Label::OnDraw(Graphics &g) {

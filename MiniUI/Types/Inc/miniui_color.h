@@ -83,6 +83,9 @@ public:
 
     void operator=(const Color &color);
 
+    bool operator==(const Color &color);
+    bool operator!=(const Color &color);
+
     static const Color Black;
     static const Color Silver;
     static const Color Gray;

@@ -22,6 +22,14 @@ void Thickness::operator=(const Thickness &thickness) {
     memcpy((void *)this, &thickness, sizeof(*this));
 }
 
+bool Thickness::operator==(const Thickness &another) const {
+    return (this->Left == another.Left) && (this->Top == another.Top) && (this->Right == another.Right) && (this->Bottom == another.Bottom);
+}
+
+bool Thickness::operator!=(const Thickness &another) const {
+    return (this->Left != another.Left) || (this->Top != another.Top) || (this->Right != another.Right) || (this->Bottom != another.Bottom);
+}
+
 bool Thickness::operator==(int16_t value) const {
     return (this->Left == value) && (this->Top == value) && (this->Right == value) && (this->Bottom == value);
 }

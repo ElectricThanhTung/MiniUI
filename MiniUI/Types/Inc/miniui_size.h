@@ -15,6 +15,9 @@ public:
 
     void operator=(const Size &size);
 
+    bool operator==(const Size &another) const;
+    bool operator!=(const Size &another) const;
+
     static const int16_t None;
     static const int16_t Auto;
 

@@ -15,6 +15,7 @@ void UserControl::SetContent(Control &control) {
     if(this->content)
         this->content->SetParent(NULL_CONTROL);
     this->content = &control;
+    this->RequestUpdate();
 }
 
 Control &UserControl::GetContent(void) {
@@ -22,7 +23,10 @@ Control &UserControl::GetContent(void) {
 }
 
 void UserControl::SetBackColor(const Color &color) {
-    this->backColor = color;
+    if(this->backColor != color) {
+        this->backColor = color;
+        this->RequestUpdate();
+    }
 }
 
 const Color &UserControl::GetBackColor(void) {
@@ -78,6 +82,16 @@ void UserControl::UpdateActualHeight(int16_t referHeight) {
         }
         else
             this->SetActualHeight(0);
+    }
+}
+
+void UserControl::UpdateLocation(void) {
+    if(this->content) {
+        const Thickness &objMargin = this->content->GetMargin();
+        int16_t x = this->GetLoaction().X + objMargin.Left;
+        int16_t y = this->GetLoaction().Y + objMargin.Top;
+        this->content->SetLocation(x, y);
+        this->content->UpdateLocation();
     }
 }
 

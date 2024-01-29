@@ -17,6 +17,8 @@ public:
     Thickness(const Thickness &thickness);
 
     void operator=(const Thickness &thickness);
+    bool operator==(const Thickness &another) const;
+    bool operator!=(const Thickness &another) const;
     bool operator==(int16_t value) const;
     bool operator!=(int16_t value) const;
 };

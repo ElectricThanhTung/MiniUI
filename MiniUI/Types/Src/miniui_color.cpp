@@ -42,6 +42,14 @@ void Color::operator=(const Color &color) {
     memcpy((void *)this, &color, sizeof(*this));
 }
 
+bool Color::operator==(const Color &color) {
+    return (this->A == color.A) && (this->R == color.R) && (this->G == color.G) && (this->B == color.B);
+}
+
+bool Color::operator!=(const Color &color) {
+    return (this->A != color.A) || (this->R != color.R) || (this->G != color.G) || (this->B != color.B);
+}
+
 const Color Color::Black = 0xFF000000;
 const Color Color::Silver = 0xFFC0C0C0;
 const Color Color::Gray = 0xFF808080;

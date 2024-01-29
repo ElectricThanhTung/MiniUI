@@ -28,3 +28,11 @@ Rect::Rect(const Rect &rect) : Location(rect.Location), Size(rect.Size) {
 void Rect::operator=(const Rect &rect) {
     memcpy((void *)this, &rect, sizeof(*this));
 }
+
+bool Rect::operator==(const Rect &another) const {
+    return (this->Left == another.Left) && (this->Top == another.Top) && (this->Width == another.Width) && (this->Height == another.Height);
+}
+
+bool Rect::operator!=(const Rect &another) const {
+    return (this->Left != another.Left) || (this->Top != another.Top) || (this->Width != another.Width) || (this->Height != another.Height);
+}

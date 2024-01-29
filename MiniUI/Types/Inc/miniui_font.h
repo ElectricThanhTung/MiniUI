@@ -41,7 +41,11 @@ public:
     Font(const Font &font);
 
     void operator=(const Font &font);
+
     const CharInfo &operator[](const char *c) const;
+
+    bool operator==(const Font &font);
+    bool operator!=(const Font &font);
 
     uint32_t Count(void) const;
     uint8_t SpaceWidth(void) const;

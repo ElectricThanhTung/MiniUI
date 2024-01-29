@@ -21,6 +21,14 @@ void Size::operator=(const Size &size) {
     memcpy((void *)this, &size, sizeof(*this));
 }
 
+bool Size::operator==(const Size &another) const {
+    return (this->Width == another.Width) && (this->Height == another.Height);
+}
+
+bool Size::operator!=(const Size &another) const {
+    return (this->Width != another.Width) || (this->Height != another.Height);
+}
+
 const int16_t Size::None = SIZE_NONE;
 const int16_t Size::Auto = SIZE_AUTO;
 

@@ -34,6 +34,9 @@ public:
     Rect(const Rect &rect);
 
     void operator=(const Rect &rect);
+
+    bool operator==(const Rect &another) const;
+    bool operator!=(const Rect &another) const;
 };
 
 #endif /* __MINIUI_RECT_H */

@@ -2,12 +2,12 @@
 #include "miniui_button.h"
 #include "miniui_collections.h"
 
-Button::Button(void) : Control(Size::AutoSize), backColor(Color::LightGray), borderColor(Color::Gray), margin(0) {
+Button::Button(void) : Control(Size::AutoSize), backColor(Color::LightGray), borderColor(Color::Gray) {
     this->content = 0;
     this->borderSize = 1;
 }
 
-Button::Button(Control &content) : Control(Size::AutoSize), backColor(Color::LightGray), borderColor(Color::Gray), margin(0) {
+Button::Button(Control &content) : Control(Size::AutoSize), backColor(Color::LightGray), borderColor(Color::Gray) {
     this->content = &content;
     this->borderSize = 1;
 }
@@ -20,6 +20,7 @@ void Button::SetContent(Control &control) {
     if(this->content)
         this->content->SetParent(NULL_CONTROL);
     this->content = &control;
+    this->RequestUpdate();
 }
 
 Control &Button::GetContent(void) {
@@ -27,7 +28,10 @@ Control &Button::GetContent(void) {
 }
 
 void Button::SetBackColor(const Color &color) {
-    this->backColor = color;
+    if(this->backColor != color) {
+        this->backColor = color;
+        this->RequestUpdate();
+    }
 }
 
 const Color &Button::GetBackColor(void) {
@@ -35,7 +39,10 @@ const Color &Button::GetBackColor(void) {
 }
 
 void Button::SetBorderColor(const Color &color) {
-    this->borderColor = color;
+    if(this->borderColor != color) {
+        this->borderColor = color;
+        this->RequestUpdate();
+    }
 }
 
 const Color &Button::GetBorderColor(void) {
@@ -43,7 +50,10 @@ const Color &Button::GetBorderColor(void) {
 }
 
 void Button::SetBorderSize(const uint8_t value) {
-    this->borderSize = value;
+    if(this->borderSize != value) {
+        this->borderSize = value;
+        this->RequestUpdate();
+    }
 }
 
 uint8_t Button::GetBorderSize(void) {
@@ -101,6 +111,16 @@ void Button::UpdateActualHeight(int16_t referHeight) {
         }
         else
             this->SetActualHeight(0);
+    }
+}
+
+void Button::UpdateLocation(void) {
+    if(this->content) {
+        const Thickness &objMargin = this->content->GetMargin();
+        int16_t x = this->GetLoaction().X + objMargin.Left;
+        int16_t y = this->GetLoaction().Y + objMargin.Top;
+        this->content->SetLocation(x, y);
+        this->content->UpdateLocation();
     }
 }
 

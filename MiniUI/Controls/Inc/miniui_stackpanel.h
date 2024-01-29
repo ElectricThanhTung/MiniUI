@@ -28,9 +28,11 @@ protected:
     virtual void OnDraw(Graphics &g);
     virtual void UpdateActualWidth(int16_t referWidth);
     virtual void UpdateActualHeight(int16_t referHeight);
+    virtual void UpdateLocation(void);
 
     using Control::SetActualWidth;
     using Control::SetActualHeight;
+    using Control::SetLocation;
 public:
     Collections Children;
 

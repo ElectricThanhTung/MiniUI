@@ -53,6 +53,14 @@ void Font::operator=(const Font &font) {
     this->EmSize = font.EmSize;
 }
 
+bool Font::operator==(const Font &font) {
+    return (this->data == font.data) && (this->EmSize == font.EmSize);
+}
+
+bool Font::operator!=(const Font &font) {
+    return (this->data != font.data) || (this->EmSize != font.EmSize);
+}
+
 const CharInfo &Font::operator[](const char *c) const {
     uint32_t unicode = Font_Utf8Decode(c);
     uint32_t r = this->data->Count - 1;

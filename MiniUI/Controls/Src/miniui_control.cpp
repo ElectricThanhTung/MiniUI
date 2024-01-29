@@ -2,7 +2,7 @@
 #include "miniui_control.h"
 #include "miniui_collections.h"
 
-Control::Control(const Size &size) : actualSize(Size::NoneSize), size(size) {
+Control::Control(const Size &size) : actualRect(Point(0, 0), Size::NoneSize), size(size) {
     this->parent = 0;
     this->parentList = 0;
     this->prev = 0;
@@ -10,9 +10,25 @@ Control::Control(const Size &size) : actualSize(Size::NoneSize), size(size) {
     this->visible = true;
 }
 
-void Control::RequestUpdate(void) {
-    if(this->parent)
-        this->parent->RequestUpdate();
+void Control::SetRequestRect(const Rect &rect) {
+
+}
+
+bool Control::RequestUpdate(bool isRecall) {
+    if(this->parent) {
+        const Rect oldRect = this->actualRect;
+        if(this->parent->RequestUpdate(true) == false) {
+            if(oldRect != this->actualRect) {
+                this->GetTopParent().SetRequestRect(this->parent->actualRect);
+                return true;
+            }
+            else if(isRecall)
+                return false;
+            else
+                this->GetTopParent().SetRequestRect(oldRect);
+        }
+    }
+    return true;
 }
 
 bool Control::operator==(Control &another) {
@@ -24,11 +40,21 @@ bool Control::operator!=(Control &another) {
 }
 
 void Control::SetParent(Control &parent) {
-    this->parent = &parent;
+    if(this->parent != &parent) {
+        this->parent = &parent;
+        this->RequestUpdate();
+    }
 }
 
 Control &Control::GetParent(void) {
     return *this->parent;
+}
+
+Control &Control::GetTopParent(void) {
+    Control *ret = this->parent;
+    while(ret->parent)
+        ret = ret->parent;
+    return *ret;
 }
 
 void Control::SetParentList(void *parentList) {
@@ -56,19 +82,31 @@ Control &Control::GetNext(void) {
 }
 
 void Control::SetActualWidth(int16_t value) {
-    *(int16_t *)&this->actualSize.Width = value;
+    *(int16_t *)&this->actualRect.Width = value;
 }
 
 void Control::SetActualHeight(int16_t value) {
-    *(int16_t *)&this->actualSize.Height = value;
+    *(int16_t *)&this->actualRect.Height = value;
+}
+
+void Control::SetLocation(int16_t x, int16_t y) {
+    *(int16_t *)&this->actualRect.Left = x;
+    *(int16_t *)&this->actualRect.Top = y;
+}
+
+const Point &Control::GetLoaction(void) {
+    return this->actualRect.Location;
 }
 
 const Size &Control::GetActualSize(void) {
-    return this->actualSize;
+    return this->actualRect.Size;
 }
 
 void Control::SetSize(const Size &size) {
-    this->size = size;
+    if( this->size != size) {
+        this->size = size;
+        this->RequestUpdate();
+    }
 }
 
 const Size &Control::GetSize(void) {
@@ -76,7 +114,10 @@ const Size &Control::GetSize(void) {
 }
 
 void Control::SetMargin(const Thickness &margin) {
-    this->margin = margin;
+    if(this->margin != margin) {
+        this->margin = margin;
+        this->RequestUpdate();
+    }
 }
 
 const Thickness &Control::GetMargin(void) {
@@ -84,7 +125,10 @@ const Thickness &Control::GetMargin(void) {
 }
 
 void Control::SetVisible(bool visible) {
-    this->visible = visible;
+    if(this->visible != visible) {
+        this->visible = visible;
+        this->RequestUpdate();
+    }
 }
 
 bool Control::GetVisible(void) {
